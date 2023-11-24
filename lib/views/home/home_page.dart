@@ -34,38 +34,31 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               children: [
                 const Spacer(),
-                BlocConsumer<AuthBloc, AuthState>(
-                  builder: (context, state) {
-                    if (state is LogoutLoading) {
-                      return const Text('Logging out...');
-                    } else {
-                      return ElevatedButton(
-                          onPressed: () {
-                            _authBloc.add(LogOutEvent());
-                          },
-                          child: const Text('Logout'));
-                    }
-                  },
-                  listener: (BuildContext context, AuthState state) {
-                    if (state is LogoutLoaded) {
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => BlocProvider<AuthBloc>.value(
-                              value: AuthBloc(),
-                              child: const LoginPage(),
-                            ),
-                          ));
-                    }
-                  },
-                ),
+                (state is LogoutLoading)
+                    ? const Text('Logging out...')
+                    : ElevatedButton(
+                        onPressed: () {
+                          _authBloc.add(LogOutEvent());
+                        },
+                        child: const Text('Logout')),
                 const Spacer(),
               ],
             ),
           ),
         );
       },
-      listener: (BuildContext context, AuthState state) {},
+      listener: (BuildContext context, AuthState state) {
+        if (state is LogoutLoaded) {
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (_) => BlocProvider<AuthBloc>.value(
+                  value: AuthBloc(),
+                  child: const LoginPage(),
+                ),
+              ));
+        }
+      },
     );
   }
 }

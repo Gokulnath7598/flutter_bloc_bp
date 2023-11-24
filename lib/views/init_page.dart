@@ -25,27 +25,21 @@ class _InitPageState extends State<InitPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthBloc, AuthState>(
+    return BlocBuilder<AuthBloc, AuthState>(
+      buildWhen: (previous, current) => current is CheckForPreferenceLoaded||current is CheckForPreferenceLoading,
         builder: (context, state) {
           if (state is CheckForPreferenceLoading) {
             return const AppLoader();
           }
           if (state is CheckForPreferenceLoaded) {
             if (state.user != null) {
-              return BlocProvider<AuthBloc>.value(
-                value: AuthBloc(),
-                child: HomePage(user: state.user),
-              );
+              return HomePage(user: state.user);
             } else {
-              return BlocProvider<AuthBloc>.value(
-                value: AuthBloc(),
-                child: const LoginPage(),
-              );
+              return const LoginPage();
             }
           } else {
             return const AppLoader();
           }
-        },
-        listener: (context, state) {});
+        });
   }
 }

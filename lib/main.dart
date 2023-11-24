@@ -11,7 +11,9 @@ Future<void> main() async {
   await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
     DeviceOrientation.portraitUp,
   ]);
-  runApp(const MyApp());
+  runApp(BlocProvider<AuthBloc>.value(
+      value: AuthBloc(),
+      child: const MyApp()));
 }
 
 class MyApp extends StatefulWidget {
@@ -36,12 +38,9 @@ class MyAppState extends State<MyApp> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'MyApp',
-      home: BlocProvider<AuthBloc>.value(
-        value: AuthBloc(),
-        child: const InitPage(),
-      ),
+      home: InitPage(),
       debugShowCheckedModeBanner: false,
     );
   }
