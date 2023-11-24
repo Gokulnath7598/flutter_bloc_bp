@@ -107,15 +107,11 @@ class ApiErrorBuilder implements Builder<ApiError, ApiErrorBuilder> {
   _$ApiError? _$v;
 
   int? _status;
-
   int? get status => _$this._status;
-
   set status(int? status) => _$this._status = status;
 
   String? _error;
-
   String? get error => _$this._error;
-
   set error(String? error) => _$this._error = error;
 
   ApiErrorBuilder();

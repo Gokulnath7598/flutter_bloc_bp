@@ -113,13 +113,13 @@ class ApiClient extends io_client.IOClient {
   Map<String, String> get defaultHeaders =>
       <String, String>{'Content-Type': 'application/json'};
 
-  Uri buildUrl({String? path, Map<String, dynamic>? queryParams}) {
+  Uri buildUrl({String? path, Map<String, dynamic>? queryParams, bool isNews = false}) {
     final Uri uri = Uri(
-      scheme: config.scheme,
-      host: config.host,
+      scheme: isNews ? 'http':config.scheme,
+      host: isNews ? 'newsapi.org':config.host,
       port: config.port,
       queryParameters: queryParams,
-      path: '${config.scope ?? ''}$path',
+      path: isNews ? '/v2$path':'${config.scope ?? ''}$path',
     );
 
     return uri;
@@ -128,6 +128,7 @@ class ApiClient extends io_client.IOClient {
   Future<ApiResponse<R>> callJsonApi<R>({
     required Method method,
     required String path,
+    bool isNews = false,
     String? fieldName,
     String? s3BucketKey,
     Map<String, dynamic>? queryParams,
@@ -147,7 +148,7 @@ class ApiClient extends io_client.IOClient {
         Duration(seconds: 1),
       ],
     ));
-    final Uri url = buildUrl(path: path, queryParams: queryParams);
+    final Uri url = buildUrl(path: path, queryParams: queryParams, isNews: isNews);
 
     dio.Response response;
 

@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_bp/bloc/auth/auth_bloc.dart';
 import 'package:flutter_bloc_bp/views/home/home_page.dart';
 
+import '../../bloc/news/news_bloc.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -49,8 +51,8 @@ class _LoginPageState extends State<LoginPage> {
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (_) => BlocProvider<AuthBloc>.value(
-                                  value: AuthBloc(),
+                                builder: (_) => BlocProvider<NewsBloc>.value(
+                                  value: NewsBloc(),
                                   child: HomePage(user: state.user),
                                 ),
                               ));

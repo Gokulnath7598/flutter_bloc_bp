@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc_bp/bloc/news/news_bloc.dart';
 import 'package:flutter_bloc_bp/views/home/home_page.dart';
 import 'package:flutter_bloc_bp/views/auth/login_page.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,9 @@ class _InitPageState extends State<InitPage> {
           }
           if (state is CheckForPreferenceLoaded) {
             if (state.user != null) {
-              return HomePage(user: state.user);
+              return BlocProvider<NewsBloc>.value(
+                  value: NewsBloc(),
+                  child: HomePage(user: state.user));
             } else {
               return const LoginPage();
             }
