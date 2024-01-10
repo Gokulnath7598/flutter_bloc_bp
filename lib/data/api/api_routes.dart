@@ -3,7 +3,7 @@ import 'api_client.dart';
 class ApiRoutes {
   static const ApiConfig apiConfig = ApiConfig(
     scheme: 'https',
-    host: 'api.uat.finobuddy.com',
+    host: 'api.uat.velichamgrow.com',
     scope: scope,
   );
 

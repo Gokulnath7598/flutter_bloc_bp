@@ -9,17 +9,17 @@ abstract class AppUser implements Built<AppUser, AppUserBuilder> {
 
   AppUser._();
 
-  @BuiltValueField(wireName: 'id')
-  int? get userId;
+  int? get id;
 
-  @BuiltValueField(wireName: 'first_name')
+  @BuiltValueField(wireName: 'firstname')
   String? get firstName;
 
-  @BuiltValueField(wireName: 'last_name')
+  @BuiltValueField(wireName: 'lastname')
   String? get lastName;
 
   String? get email;
 
+  @BuiltValueField(wireName: 'phone_number')
   String? get mobile;
 
   String? get gender;

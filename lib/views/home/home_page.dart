@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
                       return
                       Container(
                         padding: const EdgeInsets.symmetric(vertical: 20),
-                        height: 300,
+                        height: 350,
                         child: (state is AllNewsLoaded) ? ListView.builder(
                           itemCount: state.allNews?.articles?.length,
                           scrollDirection: Axis.horizontal,

@@ -19,7 +19,7 @@ class _$AppUserSerializer implements StructuredSerializer<AppUser> {
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[];
     Object? value;
-    value = object.userId;
+    value = object.id;
     if (value != null) {
       result
         ..add('id')
@@ -28,14 +28,14 @@ class _$AppUserSerializer implements StructuredSerializer<AppUser> {
     value = object.firstName;
     if (value != null) {
       result
-        ..add('first_name')
+        ..add('firstname')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
     value = object.lastName;
     if (value != null) {
       result
-        ..add('last_name')
+        ..add('lastname')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
@@ -49,7 +49,7 @@ class _$AppUserSerializer implements StructuredSerializer<AppUser> {
     value = object.mobile;
     if (value != null) {
       result
-        ..add('mobile')
+        ..add('phone_number')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
@@ -82,14 +82,14 @@ class _$AppUserSerializer implements StructuredSerializer<AppUser> {
       final Object? value = iterator.current;
       switch (key) {
         case 'id':
-          result.userId = serializers.deserialize(value,
+          result.id = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int?;
           break;
-        case 'first_name':
+        case 'firstname':
           result.firstName = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'last_name':
+        case 'lastname':
           result.lastName = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
@@ -97,7 +97,7 @@ class _$AppUserSerializer implements StructuredSerializer<AppUser> {
           result.email = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
-        case 'mobile':
+        case 'phone_number':
           result.mobile = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
@@ -118,7 +118,7 @@ class _$AppUserSerializer implements StructuredSerializer<AppUser> {
 
 class _$AppUser extends AppUser {
   @override
-  final int? userId;
+  final int? id;
   @override
   final String? firstName;
   @override
@@ -136,7 +136,7 @@ class _$AppUser extends AppUser {
       (new AppUserBuilder()..update(updates))._build();
 
   _$AppUser._(
-      {this.userId,
+      {this.id,
       this.firstName,
       this.lastName,
       this.email,
@@ -156,7 +156,7 @@ class _$AppUser extends AppUser {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is AppUser &&
-        userId == other.userId &&
+        id == other.id &&
         firstName == other.firstName &&
         lastName == other.lastName &&
         email == other.email &&
@@ -168,7 +168,7 @@ class _$AppUser extends AppUser {
   @override
   int get hashCode {
     var _$hash = 0;
-    _$hash = $jc(_$hash, userId.hashCode);
+    _$hash = $jc(_$hash, id.hashCode);
     _$hash = $jc(_$hash, firstName.hashCode);
     _$hash = $jc(_$hash, lastName.hashCode);
     _$hash = $jc(_$hash, email.hashCode);
@@ -182,7 +182,7 @@ class _$AppUser extends AppUser {
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'AppUser')
-          ..add('userId', userId)
+          ..add('id', id)
           ..add('firstName', firstName)
           ..add('lastName', lastName)
           ..add('email', email)
@@ -196,9 +196,9 @@ class _$AppUser extends AppUser {
 class AppUserBuilder implements Builder<AppUser, AppUserBuilder> {
   _$AppUser? _$v;
 
-  int? _userId;
-  int? get userId => _$this._userId;
-  set userId(int? userId) => _$this._userId = userId;
+  int? _id;
+  int? get id => _$this._id;
+  set id(int? id) => _$this._id = id;
 
   String? _firstName;
   String? get firstName => _$this._firstName;
@@ -229,7 +229,7 @@ class AppUserBuilder implements Builder<AppUser, AppUserBuilder> {
   AppUserBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _userId = $v.userId;
+      _id = $v.id;
       _firstName = $v.firstName;
       _lastName = $v.lastName;
       _email = $v.email;
@@ -258,7 +258,7 @@ class AppUserBuilder implements Builder<AppUser, AppUserBuilder> {
   _$AppUser _build() {
     final _$result = _$v ??
         new _$AppUser._(
-            userId: userId,
+            id: id,
             firstName: firstName,
             lastName: lastName,
             email: email,

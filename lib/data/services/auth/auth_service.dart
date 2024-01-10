@@ -15,7 +15,7 @@ class AuthService extends ApiService {
         headers: <String, String>{
           'Content-Type': 'application/json',
         },
-        path: '/user_management/customer/sign_in',
+        path: '/user_management/employee/login',
         body: objToApi);
     if (res.isSuccess) {
       return {'customer': res.resData?.user, 'token': res.resData?.token};

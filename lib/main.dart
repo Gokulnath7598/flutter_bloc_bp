@@ -5,15 +5,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_bp/views/init_page.dart';
 import 'bloc/auth/auth_bloc.dart';
 
+final AuthBloc authBloc = AuthBloc();
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
     DeviceOrientation.portraitUp,
   ]);
-  runApp(BlocProvider<AuthBloc>.value(
-      value: AuthBloc(),
-      child: const MyApp()));
+  runApp(
+      MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (context) => authBloc),
+          ],
+          child: const MyApp()));
 }
 
 class MyApp extends StatefulWidget {

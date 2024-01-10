@@ -42,7 +42,7 @@ class _$ApiSuccessSerializer implements StructuredSerializer<ApiSuccess> {
     value = object.user;
     if (value != null) {
       result
-        ..add('customer')
+        ..add('employee')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(AppUser)));
     }
@@ -72,7 +72,7 @@ class _$ApiSuccessSerializer implements StructuredSerializer<ApiSuccess> {
           result.token.replace(serializers.deserialize(value,
               specifiedType: const FullType(AccessToken))! as AccessToken);
           break;
-        case 'customer':
+        case 'employee':
           result.user.replace(serializers.deserialize(value,
               specifiedType: const FullType(AppUser))! as AppUser);
           break;

@@ -36,15 +36,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(LoginLoading());
       try {
         final Map<String, dynamic> objToApi = <String, dynamic>{
-          'customer': <String, String>{
-            'mobile': event.mobile ?? '',
-            'password': event.password ?? '',
-            'grant_type': 'password'
+          "employee": {
+            "email": event.mobile ?? '',
+            "password": event.password ?? '',
+            "build_number": 100,
+            "is_mobile": true,
+            "grant_type": "password"
           }
         };
         final Map<String, dynamic>? response =
             await authService.loginWithPassword(objToApi: objToApi);
         final AppUser? user = response?['customer'];
+        print(response);
         final SharedPreferences prefs = await SharedPreferences.getInstance();
         PreferencesClient(prefs: prefs).saveUser(appUser: user);
         emit(LoginLoaded(user));
