@@ -1,30 +1,21 @@
-import 'package:built_value/built_value.dart';
-import 'package:built_value/serializer.dart';
+class AppUser {
+  int? id;
+  String? firstname;
+  String? lastname;
 
-part 'app_user.g.dart';
+  AppUser({this.id, this.firstname, this.lastname});
 
-abstract class AppUser implements Built<AppUser, AppUserBuilder> {
-  factory AppUser([AppUserBuilder Function(AppUserBuilder builder) updates]) =
-      _$AppUser;
+  AppUser.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    firstname = json['firstname'];
+    lastname = json['lastname'];
+  }
 
-  AppUser._();
-
-  int? get id;
-
-  @BuiltValueField(wireName: 'firstname')
-  String? get firstName;
-
-  @BuiltValueField(wireName: 'lastname')
-  String? get lastName;
-
-  String? get email;
-
-  @BuiltValueField(wireName: 'phone_number')
-  String? get mobile;
-
-  String? get gender;
-
-  String? get dob;
-
-  static Serializer<AppUser> get serializer => _$appUserSerializer;
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['firstname'] = firstname;
+    data['lastname'] = lastname;
+    return data;
+  }
 }

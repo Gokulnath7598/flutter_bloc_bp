@@ -1,23 +1,21 @@
-import 'package:built_value/built_value.dart';
-import 'package:built_value/serializer.dart';
+class Token {
+  String? accessToken;
+  String? refreshToken;
+  String? expiresIn;
 
-part 'access_token.g.dart';
+  Token({this.accessToken, this.refreshToken, this.expiresIn});
 
-abstract class AccessToken implements Built<AccessToken, AccessTokenBuilder> {
-  factory AccessToken(
-          [AccessTokenBuilder Function(AccessTokenBuilder builder) updates]) =
-      _$AccessToken;
+  Token.fromJson(Map<String, dynamic> json) {
+    accessToken = json['access_token'];
+    refreshToken = json['refresh_token'];
+    expiresIn = json['expiresIn'];
+  }
 
-  AccessToken._();
-
-  @BuiltValueField(wireName: 'access_token')
-  String? get accessToken;
-
-  @BuiltValueField(wireName: 'refresh_token')
-  String? get refreshToken;
-
-  @BuiltValueField(wireName: 'expires_in')
-  int? get expiresIn;
-
-  static Serializer<AccessToken> get serializer => _$accessTokenSerializer;
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['access_token'] = accessToken;
+    data['refresh_token'] = refreshToken;
+    data['expiresIn'] = expiresIn;
+    return data;
+  }
 }

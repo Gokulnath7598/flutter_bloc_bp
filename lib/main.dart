@@ -2,10 +2,13 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc_bp/views/auth/bloc/auth_bloc.dart';
 import 'package:flutter_bloc_bp/views/init_page.dart';
-import 'bloc/auth/auth_bloc.dart';
+
+import 'base_bloc/base_bloc.dart';
 
 final AuthBloc authBloc = AuthBloc();
+final navigatorKey = GlobalKey<NavigatorState>();
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,6 +16,9 @@ Future<void> main() async {
   await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
     DeviceOrientation.portraitUp,
   ]);
+
+  Bloc.observer = AppBlocObserver();
+
   runApp(
       MultiBlocProvider(
           providers: [
@@ -22,30 +28,30 @@ Future<void> main() async {
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   MyAppState createState() => MyAppState();
 }
 
 class MyAppState extends State<MyApp> with WidgetsBindingObserver {
+
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    _init();
   }
 
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
+  Future<void> _init() async {}
+
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      navigatorKey: navigatorKey,
       title: 'MyApp',
-      home: InitPage(),
+      home: const InitPage(),
       debugShowCheckedModeBanner: false,
     );
   }
